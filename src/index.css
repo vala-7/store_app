@@ -1,0 +1,244 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 158 64% 30%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 40% 94%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 210 40% 94%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 158 64% 92%;
+    --accent-foreground: 158 64% 20%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    --border: 214 32% 88%;
+    --input: 214 32% 88%;
+    --ring: 158 64% 30%;
+    --chart-1: 158 64% 30%;
+    --chart-2: 142 71% 45%;
+    --chart-3: 38 92% 50%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 0 72% 51%;
+    --radius: 0.75rem;
+  }
+  .dark {
+    --background: 222 47% 8%;
+    --foreground: 210 40% 96%;
+    --card: 222 47% 11%;
+    --card-foreground: 210 40% 96%;
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 96%;
+    --primary: 158 64% 40%;
+    --primary-foreground: 222 47% 8%;
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 96%;
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 217 33% 20%;
+    --accent-foreground: 210 40% 96%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 0 0% 98%;
+    --success: 142 71% 40%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 45%;
+    --warning-foreground: 0 0% 100%;
+    --border: 217 33% 20%;
+    --input: 217 33% 20%;
+    --ring: 158 64% 40%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Vazirmatn', system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  html {
+    font-family: 'Vazirmatn', system-ui, sans-serif;
+    font-size: 15px;
+  }
+  /* Larger, bolder table cells and form inputs */
+  table {
+    font-size: 0.9rem;
+  }
+  th {
+    font-weight: 600;
+  }
+  td {
+    font-weight: 500;
+  }
+  input, textarea, select {
+    font-size: 0.9rem;
+  }
+}
+
+/* Persian numerals utility */
+.font-num {
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}
+
+/* ========================================
+   CLEAN PRINT ENGINE
+   ======================================== */
+@media print {
+  /* A4 default */
+  @page {
+    margin: 10mm;
+    size: A4;
+  }
+  /* A5 compact */
+  body.print-a5 {
+    @page {
+      margin: 8mm;
+      size: A5;
+    }
+  }
+
+  html, body {
+    background: #ffffff !important;
+    font-size: 12px !important;
+    color: #000000 !important;
+  }
+
+  /* Hide everything that's not the print area */
+  .no-print {
+    display: none !important;
+  }
+
+  /* Hide all app chrome: sidebar, header, modals, overlays */
+  aside,
+  header,
+  .fixed.inset-0,
+  [data-radix-overlay-wrapper],
+  .vaul-drawer-wrapper,
+  .vaul-drawer-overlay {
+    display: none !important;
+  }
+
+  /* Reset dialog to full-flow static content */
+  [role="dialog"],
+  [data-radix-dialog-content],
+  [data-radix-dialog-overlay] {
+    position: static !important;
+    max-height: none !important;
+    overflow: visible !important;
+    transform: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    background: #ffffff !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    inset: auto !important;
+  }
+
+  /* Remove any backdrop overlay */
+  [data-radix-overlay] {
+    background: transparent !important;
+  }
+
+  /* Print area takes full page */
+  .print-area {
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* Tables: clean borders, no clipping */
+  .print-area table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+  }
+  .print-area table th,
+  .print-area table td {
+    border: 1px solid #999 !important;
+    padding: 5px 8px !important;
+    font-size: 11px !important;
+    color: #000000 !important;
+  }
+  .print-area table th {
+    background: #f0f0f0 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    font-weight: 700 !important;
+  }
+  .print-area tr {
+    page-break-inside: avoid !important;
+  }
+  .print-area thead {
+    display: table-header-group !important;
+  }
+
+  /* Signature area for print */
+  .print-signatures {
+    display: flex !important;
+  }
+
+  /* Remove any watermark elements */
+  [class*="watermark"],
+  [class*="bolt-badge"],
+  [class*="made-with"],
+  iframe[src*="bolt"] {
+    display: none !important;
+  }
+
+  /* A5 compact: smaller fonts */
+  body.print-a5 .print-area table th,
+  body.print-a5 .print-area table td {
+    font-size: 9px !important;
+    padding: 3px 5px !important;
+  }
+  body.print-a5 .print-area {
+    font-size: 10px !important;
+  }
+}
+
+/* Smooth animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+  animation: fadeIn 0.2s ease-out;
+}
